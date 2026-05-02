@@ -144,7 +144,7 @@ export const Navbar = () => {
                     <button 
                       onClick={() => {
                         setIsDropdownOpen(false);
-                        signOut();
+                        signOut({ callbackUrl: window.location.origin });
                       }}
                       className="w-full text-left px-4 py-2 text-sm text-red-400 hover:text-red-300 hover:bg-white/5 transition-colors cursor-pointer font-bold"
                     >
