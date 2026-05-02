@@ -29,13 +29,13 @@ export const Navbar = () => {
   }, [isDropdownOpen]);
 
   return (
-    <nav className="fixed top-0 w-full z-50 bg-[#0a0a0a] border-b border-brand-purple/20 py-4 px-8 animate-in fade-in slide-in-from-top-4 duration-700 shadow-[0_0_30px_rgba(168,85,247,0.25)]">
+    <nav className="fixed top-0 w-full z-50 bg-[#0a0a0a] border-b border-brand-purple/20 py-4 px-4 md:px-8 animate-in fade-in slide-in-from-top-4 duration-700 shadow-[0_0_30px_rgba(168,85,247,0.25)]">
       <div className="max-w-7xl mx-auto flex justify-between items-center w-full">
 
         <Link href="/" className="cursor-pointer group">
-          <div className="flex items-center space-x-1">
-            <div className="w-8 h-8 bg-brand-purple flex items-center justify-center shadow-[2px_2px_0px_0px_rgba(255,255,255,0.2)] border border-brand-purple/50 group-hover:scale-105 transition-transform">
-              <svg viewBox="0 0 24 24" className="w-5 h-5 text-white" fill="currentColor">
+          <div className="flex items-center space-x-1 sm:space-x-2">
+            <div className="w-6 h-6 sm:w-8 sm:h-8 bg-brand-purple flex items-center justify-center shadow-[2px_2px_0px_0px_rgba(255,255,255,0.2)] border border-brand-purple/50 group-hover:scale-105 transition-transform">
+              <svg viewBox="0 0 24 24" className="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="currentColor">
                 <rect x="2" y="4" width="8" height="3" />
                 <rect x="4.5" y="7" width="3" height="13" />
                 <rect x="14" y="4" width="8" height="3" />
@@ -45,7 +45,7 @@ export const Navbar = () => {
                 <rect x="14" y="17" width="8" height="3" />
               </svg>
             </div>
-            <h1 className="text-2xl font-black text-white tracking-tighter">
+            <h1 className="text-base sm:text-2xl font-black text-white tracking-tighter">
               TRAC<span className="text-brand-purple">STAC</span>
             </h1>
           </div>
@@ -73,7 +73,7 @@ export const Navbar = () => {
         </div>
 
         {/* Mobile Navigation Icons */}
-        <div className="flex md:hidden items-center space-x-6">
+        <div className="flex md:hidden items-center space-x-4 sm:space-x-6 mx-2">
           <Link href="/" className={`transition-colors ${pathname === '/' ? 'text-brand-purple' : 'text-white/70 hover:text-brand-purple'}`}>
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
@@ -156,7 +156,7 @@ export const Navbar = () => {
             </div>
           ) : (
             <Link href="/signup" className="cursor-pointer">
-              <Button variant="primary" size="sm" className="cursor-pointer px-8">
+              <Button variant="primary" size="sm" className="cursor-pointer px-3 sm:px-8 py-2 text-[10px] sm:text-xs font-black uppercase tracking-widest">
                 ACCESS PORTAL
               </Button>
             </Link>
