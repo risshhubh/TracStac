@@ -68,11 +68,12 @@ export const authOptions: NextAuthOptions = {
     async signIn({ user }) {
       if (user.id) {
         try {
+          const roleLabel = (user as any).role === 'ADMIN' ? 'Admin' : 'Member';
           await prisma.activity.create({
             data: {
               userId: user.id,
               action: 'USER_LOGIN',
-              details: `User logged in: ${user.email}`,
+              details: `${roleLabel} logged in: ${user.email}`,
             },
           });
         } catch (error) {
