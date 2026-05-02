@@ -45,6 +45,52 @@
 
 ---
 
+## 🏗️ System Architecture & Ecosystem
+
+TracStac is engineered as a full-stack monolith using the **Next.js App Router** architecture. It leverages a centralized data layer to ensure consistency between the Admin control panel and the Employee task views.
+
+### 🧩 Core Modules
+- **Identity Engine**: Custom NextAuth implementation with JWT strategy, providing sub-millisecond session validation and role-based route protection via Middleware.
+- **Pulse API**: A collection of high-speed REST endpoints that aggregate project progress, task distributions, and user activity streams.
+- **Kanban Pipeline**: A responsive, state-managed task board that allows for real-time status updates and priority shifts.
+
+---
+
+## 📂 Project Structure
+
+```text
+R:\TRACKSTACK
+├── prisma/               # Database Schema & Migrations
+├── public/               # Static Assets & Global Media
+├── src/
+│   ├── app/              # Next.js App Router (Pages & API Routes)
+│   │   ├── api/          # Unified REST API Layer
+│   │   ├── dashboard/    # Admin Control Center
+│   │   ├── tasks/        # Employee Task Module
+│   │   └── progress/     # Pulse Analytics Page
+│   ├── components/       
+│   │   ├── dashboard/    # Specialized Admin UI Components
+│   │   ├── layout/       # Navigation & Global Wrappers
+│   │   └── sections/     # High-Impact Marketing Components
+│   ├── lib/              # Shared Utilities (Prisma Client, Auth Config)
+│   ├── types/            # Global TypeScript Definitions
+│   └── middleware.ts     # Edge-level Security & Role Routing
+├── .env                  # Environment Configuration
+├── package.json          # Dependencies & Scripts
+└── tsconfig.json         # TypeScript Configuration
+```
+
+---
+
+## ⚡ Technical Highlights
+
+- **Edge-Level Security**: Middleware handles role-based redirection before a page even starts rendering, preventing unauthorized access at the network edge.
+- **Dynamic Data Aggregation**: Complex Prisma queries use `_count` and `include` optimizations to fetch nested project data in a single database round-trip.
+- **Premium Performance**: Utilizing **Next.js Turbopack** for ultra-fast development cycles and optimized production bundles.
+- **Scalable NoSQL**: Backed by **MongoDB Atlas**, allowing for flexible project schemas and rapid horizontal scaling.
+
+---
+
 ## 🚀 Local Installation
 
 ### 1. Clone & Install
