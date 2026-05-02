@@ -1,28 +1,29 @@
-import { withAuth } from "next-auth/middleware";
+import { getToken } from "next-auth/jwt";
 import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 
-export default withAuth(
-  function middleware(req) {
-    const token = req.nextauth.token;
-    const pathname = req.nextUrl.pathname;
+export async function middleware(req: NextRequest) {
+  const token = await getToken({ 
+    req, 
+    secret: process.env.NEXTAUTH_SECRET 
+  });
+  
+  const { pathname } = req.nextUrl;
 
-    // Admin only route
-    if (pathname.startsWith("/dashboard") && token?.role !== "ADMIN") {
-      return NextResponse.redirect(new URL("/tasks", req.url));
-    }
-    
-    return NextResponse.next();
-  },
-  {
-    callbacks: {
-      authorized: ({ token }) => !!token,
-    },
-    pages: {
-      signIn: "/login",
-    },
-    secret: process.env.NEXTAUTH_SECRET,
+  // Protect all routes in the matcher
+  if (!token) {
+    const url = new URL("/login", req.url);
+    url.searchParams.set("callbackUrl", pathname);
+    return NextResponse.redirect(url);
   }
-);
+
+  // Admin only route
+  if (pathname.startsWith("/dashboard") && token?.role !== "ADMIN") {
+    return NextResponse.redirect(new URL("/tasks", req.url));
+  }
+
+  return NextResponse.next();
+}
 
 export const config = {
   matcher: [
