@@ -142,9 +142,10 @@ export const Navbar = () => {
                   </Link>
                   <div className="border-t border-white/5 mt-1 pt-1">
                     <button 
-                      onClick={() => {
+                      onClick={async () => {
                         setIsDropdownOpen(false);
-                        signOut({ callbackUrl: window.location.origin });
+                        await signOut({ redirect: false });
+                        window.location.href = window.location.origin;
                       }}
                       className="w-full text-left px-4 py-2 text-sm text-red-400 hover:text-red-300 hover:bg-white/5 transition-colors cursor-pointer font-bold"
                     >
