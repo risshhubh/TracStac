@@ -12,9 +12,7 @@ export default function ProfilePage() {
   const [stats, setStats] = useState<any>(null);
 
   useEffect(() => {
-    if (status === 'unauthenticated') {
-      router.push('/login');
-    } else if (status === 'authenticated') {
+    if (status === 'authenticated') {
       fetchProfileStats();
     }
   }, [status]);

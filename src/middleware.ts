@@ -1,35 +1,28 @@
-import { getToken } from "next-auth/jwt";
+import { withAuth } from "next-auth/middleware";
 import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
 
-export async function middleware(req: NextRequest) {
-  const token = await getToken({ 
-    req, 
-    secret: process.env.NEXTAUTH_SECRET 
-  });
-  
-  const { pathname } = req.nextUrl;
-  
-  // Define protected routes
-  const isProtectedRoute = pathname.startsWith("/dashboard") || 
-                          pathname.startsWith("/tasks") || 
-                          pathname.startsWith("/projects") || 
-                          pathname.startsWith("/team") || 
-                          pathname.startsWith("/progress");
-                          
-  if (isProtectedRoute && !token) {
-    const loginUrl = new URL("/login", req.url);
-    loginUrl.searchParams.set("callbackUrl", pathname);
-    return NextResponse.redirect(loginUrl);
+export default withAuth(
+  function middleware(req) {
+    const token = req.nextauth.token;
+    const pathname = req.nextUrl.pathname;
+
+    // Admin only route
+    if (pathname.startsWith("/dashboard") && token?.role !== "ADMIN") {
+      return NextResponse.redirect(new URL("/tasks", req.url));
+    }
+    
+    return NextResponse.next();
+  },
+  {
+    callbacks: {
+      authorized: ({ token }) => !!token,
+    },
+    secret: process.env.NEXTAUTH_SECRET,
+    pages: {
+      signIn: "/login",
+    },
   }
-  
-  // Admin only route
-  if (pathname.startsWith("/dashboard") && token?.role !== "ADMIN") {
-    return NextResponse.redirect(new URL("/tasks", req.url));
-  }
-  
-  return NextResponse.next();
-}
+);
 
 export const config = {
   matcher: [
@@ -42,6 +35,10 @@ export const config = {
     "/tasks",
     "/projects",
     "/team",
-    "/progress"
+    "/progress",
+    "/profile",
+    "/settings",
+    "/profile/:path*",
+    "/settings/:path*"
   ],
 };

@@ -45,8 +45,7 @@ export default function LoginPage() {
 
   if (showSuccessScreen) {
     return <AuthLoading onComplete={() => {
-      router.push('/');
-      router.refresh();
+      window.location.href = '/';
     }} />;
   }
 

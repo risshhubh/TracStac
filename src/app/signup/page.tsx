@@ -60,8 +60,7 @@ export default function SignupPage() {
     return <AuthLoading 
       message="Initializing Your Account" 
       onComplete={() => {
-        router.push('/');
-        router.refresh();
+        window.location.href = '/';
       }} 
     />;
   }

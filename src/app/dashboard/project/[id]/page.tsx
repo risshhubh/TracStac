@@ -42,9 +42,7 @@ export default function ProjectPage({ params }: { params: Promise<{ id: string }
   const [allUsers, setAllUsers] = useState<{id: string, name: string, email: string}[]>([]);
 
   useEffect(() => {
-    if (status === 'unauthenticated') {
-      router.push('/login');
-    } else if (status === 'authenticated') {
+    if (status === 'authenticated') {
       fetchProject();
     }
   }, [status]);

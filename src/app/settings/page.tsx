@@ -11,11 +11,7 @@ export default function SettingsPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    if (status === 'unauthenticated') {
-      router.push('/login');
-    }
-  }, [status]);
+  // Authentication handled by middleware
 
   if (status === 'loading') return null;
   if (!session) return null;

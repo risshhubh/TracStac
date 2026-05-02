@@ -7,10 +7,7 @@ async function main() {
     await prisma.activity.deleteMany({});
     await prisma.task.deleteMany({});
     await prisma.project.deleteMany({});
-    await prisma.session.deleteMany({});
-    await prisma.account.deleteMany({});
-    await prisma.user.deleteMany({});
-    console.log('✨ Database reset complete!');
+    console.log('✨ Operational data cleared (Activities, Tasks, Projects preserved).');
   } catch (e) {
     console.error(e);
   } finally {
