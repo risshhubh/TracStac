@@ -1,12 +1,18 @@
-# 🌑 TracStac: The Ultimate Command Center
+# <p align="center">TracStac - v1.0</p>
 
-**TracStac** is a premium, high-performance project management ecosystem designed for speed, precision, and visual excellence. Built with a "Ship-First" philosophy, it combines a sleek Neo-Brutalist aesthetic with powerful role-based workflows to streamline team collaboration.
+<p align="center">
+  <a href="https://tracstac-progresstrackr.up.railway.app/">
+    <img src="https://img.shields.io/badge/%F0%9F%94%B4%20Live%20Demo-0078D4?style=for-the-badge&logoColor=white" alt="Live Demo" />
+  </a>
+</p>
 
-![Deployment Status](https://img.shields.io/badge/Railway-Live-emerald?style=for-the-badge&logo=railway)
-![Tech Stack](https://img.shields.io/badge/Next.js%2015-Black?style=for-the-badge&logo=next.js)
-![Database](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
+<p align="center">
+  <img src="./public/mockup.png" alt="TracStac Mockup" width="100%" />
+</p>
 
 ---
+
+**TracStac** is a premium, high-performance project management ecosystem...
 
 ## ✨ Core Pillars
 
