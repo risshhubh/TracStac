@@ -12,9 +12,7 @@ export default function ProgressPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (status === 'unauthenticated') {
-      router.push('/login');
-    } else if (status === 'authenticated') {
+    if (status === 'authenticated') {
       fetchProgress();
     }
   }, [status]);

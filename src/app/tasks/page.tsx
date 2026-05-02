@@ -25,11 +25,7 @@ export default function TasksPage() {
   const { status } = useSession();
   const router = useRouter();
 
-  useEffect(() => {
-    if (status === 'unauthenticated') {
-      router.push('/login');
-    }
-  }, [status, router]);
+  // Authentication handled by middleware
 
   if (status === 'loading') return null;
 

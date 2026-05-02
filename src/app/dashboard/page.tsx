@@ -35,10 +35,10 @@ export default function DashboardPage() {
   const [newProjectName, setNewProjectName] = useState('');
   const [newProjectDesc, setNewProjectDesc] = useState('');
 
+  // Authentication handled by middleware
+
   useEffect(() => {
-    if (status === 'unauthenticated') {
-      router.push('/login');
-    } else if (status === 'authenticated') {
+    if (status === 'authenticated') {
       fetchProjects();
     }
   }, [status]);
