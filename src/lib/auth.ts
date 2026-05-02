@@ -4,9 +4,11 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import prisma from "@/lib/prisma";
 
-// Ensure NEXTAUTH_URL is set correctly for Vercel
-if (process.env.VERCEL_URL && !process.env.NEXTAUTH_URL) {
-  process.env.NEXTAUTH_URL = `https://${process.env.VERCEL_URL}`;
+// Force the correct URL in production (Vercel)
+if (process.env.VERCEL_URL) {
+  process.env.NEXTAUTH_URL = `https://trac-stac.vercel.app`;
+} else if (!process.env.NEXTAUTH_URL) {
+  process.env.NEXTAUTH_URL = "http://localhost:3000";
 }
 
 export const authOptions: NextAuthOptions = {
