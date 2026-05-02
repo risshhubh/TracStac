@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { signIn } from 'next-auth/react';
 import { Button } from '@/components/ui/Button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
+import { AuthLoading } from '@/components/ui/AuthLoading';
 
 
 export default function LoginPage() {
@@ -14,6 +15,7 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [showSuccessScreen, setShowSuccessScreen] = useState(false);
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -29,10 +31,10 @@ export default function LoginPage() {
       });
 
       if (res?.ok) {
-        router.push('/');
-        router.refresh();
+        setShowSuccessScreen(true);
       } else {
         setError('Invalid email or password');
+        setLoading(false);
       }
     } catch (err) {
       setError('Something went wrong');
@@ -40,6 +42,13 @@ export default function LoginPage() {
       setLoading(false);
     }
   };
+
+  if (showSuccessScreen) {
+    return <AuthLoading onComplete={() => {
+      router.push('/');
+      router.refresh();
+    }} />;
+  }
 
   return (
     <div className="min-h-screen bg-brand-dark flex flex-col items-center justify-center p-6">

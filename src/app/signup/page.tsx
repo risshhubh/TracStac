@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { signIn } from 'next-auth/react';
 import { Button } from '@/components/ui/Button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
+import { AuthLoading } from '@/components/ui/AuthLoading';
 
 
 export default function SignupPage() {
@@ -16,6 +17,7 @@ export default function SignupPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [showSuccessScreen, setShowSuccessScreen] = useState(false);
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -39,7 +41,7 @@ export default function SignupPage() {
         });
 
         if (loginRes?.ok) {
-          router.push('/');
+          setShowSuccessScreen(true);
         } else {
           router.push('/login');
         }
@@ -53,6 +55,16 @@ export default function SignupPage() {
       setLoading(false);
     }
   };
+
+  if (showSuccessScreen) {
+    return <AuthLoading 
+      message="Initializing Your Account" 
+      onComplete={() => {
+        router.push('/');
+        router.refresh();
+      }} 
+    />;
+  }
 
   return (
     <div className="min-h-screen bg-brand-dark flex flex-col items-center justify-center p-6">
